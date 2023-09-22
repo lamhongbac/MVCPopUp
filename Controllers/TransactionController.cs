@@ -31,6 +31,11 @@ namespace MVCPopUp.Controllers
             }
         }
 
+        public IActionResult Create()
+        {
+            TransactionModel model = new TransactionModel();
+            return View(model);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit(int id, [Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,SWIFTCode,Amount,Date")] TransactionModel transactionModel)

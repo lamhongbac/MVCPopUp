@@ -11,7 +11,7 @@ namespace MVCPopUp.Models
         public int TransactionId { get; set; }
 
         [Column(TypeName = "nvarchar(12)")]
-        [DisplayName("Account Number")]
+        [DisplayName("Account")]
         [Required(ErrorMessage = "This Field is required.")]
         [MaxLength(12, ErrorMessage = "Maximum 12 characters only")]
         public string AccountNumber { get; set; }
