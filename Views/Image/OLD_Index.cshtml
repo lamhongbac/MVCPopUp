@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MVCPopUp.Models.ImageModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+<h1>Index</h1>
+<p>
+    <!--Get Method: use  URL.Actionn (Action,controller, para)-->
+    <a onclick="showInPopup('@Url.Action("UploadPopUp","Image",null,Context.Request.Scheme)','Upload New Image')" class="btn btn-success text-white"><i class="fas fa-random"></i> Upload Image</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new {  id=item.ImageId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

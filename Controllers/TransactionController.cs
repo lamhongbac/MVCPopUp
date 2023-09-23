@@ -36,6 +36,8 @@ namespace MVCPopUp.Controllers
             TransactionModel model = new TransactionModel();
             return View(model);
         }
+
+        [NoDirectAccess]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddOrEdit(int id, [Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,SWIFTCode,Amount,Date")] TransactionModel transactionModel)
@@ -69,6 +71,16 @@ namespace MVCPopUp.Controllers
                 return Json(new { isValid = true, html = Helper.RenderRazorViewToString(this, "_ViewAll", _context.Transactions.ToList()) });
             }
             return Json(new { isValid = false, html = Helper.RenderRazorViewToString(this, "AddOrEdit", transactionModel) });
+        }
+        
+        [HttpPost,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult>DeleteConfirmed(int id)
+        {
+            var transactionModel = await _context.Transactions.FindAsync(id);
+            _context.Transactions.Remove(transactionModel);
+            await _context.SaveChangesAsync();
+            return Json(new { html = Helper.RenderRazorViewToString(this, "_ViewAll", _context.Transactions.ToList()) });
         }
         private bool TransactionModelExists(int id)
         {

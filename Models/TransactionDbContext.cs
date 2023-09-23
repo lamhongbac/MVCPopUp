@@ -8,5 +8,6 @@ namespace MVCPopUp.Models
         { }
 
         public DbSet<TransactionModel> Transactions { get; set; }
+        public DbSet<ImageModel> Images { get; set; }
     }
 }
